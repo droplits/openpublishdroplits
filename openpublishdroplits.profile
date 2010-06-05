@@ -10,7 +10,7 @@
 /**
  * Implementation of hook_profile_details()
  */
-function openpublish_profile_details() {  
+function openpublishdroplits_profile_details() {  
   return array(
     'name' => 'OpenPublish',
     'description' => st('The power of Drupal for today\'s online publishing from Phase2 Technology.'),
@@ -20,7 +20,7 @@ function openpublish_profile_details() {
 /**
  * Implementation of hook_profile_modules().
  */
-function openpublish_profile_modules() {
+function openpublishdroplits_profile_modules() {
   $core_modules = array(
     // Required core modules
     'block', 'filter', 'node', 'system', 'user',
@@ -97,7 +97,7 @@ function openpublish_profile_modules() {
 /**
  * Features module and OpenPublish features
  */
-function openpublish_feature_modules() {
+function openpublishdroplits_feature_modules() {
   $features = array(
 	  'op_author', 
 	  'op_author_layout',	  
@@ -133,7 +133,7 @@ function openpublish_feature_modules() {
  *   while the values will be displayed to the user in the installer
  *   task list.
  */
-function openpublish_profile_task_list() {
+function openpublishdroplits_profile_task_list() {
   global $conf;
   $conf['site_name'] = 'OpenPublish';
   $conf['site_footer'] = 'OpenPublish by <a href="http://phase2technology.com">Phase2 Technology</a>';
@@ -149,15 +149,15 @@ function openpublish_profile_task_list() {
 /**
  * Implementation of hook_profile_tasks().
  */
-function openpublish_profile_tasks(&$task, $url) {
+function openpublishdroplits_profile_tasks(&$task, $url) {
   $output = "";
   
-  install_include(openpublish_profile_modules());
+  install_include(openpublishdroplits_profile_modules());
 
   if($task == 'profile') {
     drupal_set_title(t('OpenPublish Installation'));
-    _openpublish_log(t('Starting Installation'));
-    _openpublish_base_settings();
+    _openpublishdroplits_log(t('Starting Installation'));
+    _openpublishdroplits_base_settings();
     $task = "op-configure";
   }
     
@@ -166,22 +166,22 @@ function openpublish_profile_tasks(&$task, $url) {
     $files = module_rebuild_cache();
     $cck_files = file_scan_directory ( dirname(__FILE__) . '/cck' , '.*\.inc$' );
     foreach ( $cck_files as $file ) {   
-      $batch['operations'][] = array('_openpublish_import_cck', array($file));      
+      $batch['operations'][] = array('_openpublishdroplits_import_cck', array($file));      
     }    
-    foreach ( openpublish_feature_modules() as $feature ) {   
+    foreach ( openpublishdroplits_feature_modules() as $feature ) {   
       $batch['operations'][] = array('_install_module_batch', array($feature, $files[$feature]->info['name']));      
       //-- Initialize each feature individually rather then all together in the end, to avoid execution timeout.
       $batch['operations'][] = array('features_flush_caches', array()); 
     }    
-    $batch['operations'][] = array('_openpublish_set_permissions', array());      
-    $batch['operations'][] = array('_openpublish_initialize_settings', array());      
-    $batch['operations'][] = array('_openpublish_placeholder_content', array());      
-    $batch['operations'][] = array('_openpublish_set_views', array());      
-    $batch['operations'][] = array('_openpublish_install_menus', array());      
-    $batch['operations'][] = array('_openpublish_setup_blocks', array()); 
-    $batch['operations'][] = array('_openpublish_cleanup', array());      
+    $batch['operations'][] = array('_openpublishdroplits_set_permissions', array());      
+    $batch['operations'][] = array('_openpublishdroplits_initialize_settings', array());      
+    $batch['operations'][] = array('_openpublishdroplits_placeholder_content', array());      
+    $batch['operations'][] = array('_openpublishdroplits_set_views', array());      
+    $batch['operations'][] = array('_openpublishdroplits_install_menus', array());      
+    $batch['operations'][] = array('_openpublishdroplits_setup_blocks', array()); 
+    $batch['operations'][] = array('_openpublishdroplits_cleanup', array());      
     $batch['error_message'] = st('There was an error configuring @drupal.', array('@drupal' => drupal_install_profile_name()));
-    $batch['finished'] = '_openpublish_configure_finished';
+    $batch['finished'] = '_openpublishdroplits_configure_finished';
     variable_set('install_task', 'op-configure-batch');
     batch_set($batch);
     batch_process($url, $url);
@@ -199,15 +199,15 @@ function openpublish_profile_tasks(&$task, $url) {
 /**
  * Import process is finished, move on to the next step
  */
-function _openpublish_configure_finished($success, $results) {
-  _openpublish_log(t('OpenPublish has been installed.'));
+function _openpublishdroplits_configure_finished($success, $results) {
+  _openpublishdroplits_log(t('OpenPublish has been installed.'));
   variable_set('install_task', 'profile-finished');
 }
 
 /**
  * Do some basic setup
  */
-function _openpublish_base_settings() {  
+function _openpublishdroplits_base_settings() {  
   global $base_url;  
 
   // create pictures dir
@@ -264,13 +264,13 @@ function _openpublish_base_settings() {
   $tzname = timezone_name_from_abbr("", $offset, 0);
   variable_set('date_default_timezone_name', $tzname);
   
-  _openpublish_log(st('Configured basic settings'));
+  _openpublishdroplits_log(st('Configured basic settings'));
 }
 
 /**
  * Import cck definitions from included files
  */
-function _openpublish_import_cck($file, &$context) {   
+function _openpublishdroplits_import_cck($file, &$context) {   
   // blog type is from drupal, so modify it
   if ($file->name == 'blog') {
     install_add_existing_field('blog', 'field_teaser', 'text_textarea');
@@ -289,14 +289,14 @@ function _openpublish_import_cck($file, &$context) {
   }
   
   $msg = st('Content Type @type setup', array('@type' => $file->name));
-  _openpublish_log($msg);
+  _openpublishdroplits_log($msg);
   $context['message'] = $msg;
 }  
 
 /**
  * Configure user/role/permission data
  */
-function _openpublish_set_permissions(&$context){
+function _openpublishdroplits_set_permissions(&$context){
   
   // Profile Fields
   $profile_full_name = array(
@@ -339,7 +339,7 @@ function _openpublish_set_permissions(&$context){
 /**
  * Set misc settings
  */
-function _openpublish_initialize_settings(&$context){
+function _openpublishdroplits_initialize_settings(&$context){
 
   // Disable default Flag
   $flag = flag_get_flag('bookmarks');
@@ -476,7 +476,7 @@ return "user";');
   variable_set('topichubs_contrib_ignore', array(1=>1));
   
   $msg = st('Setup general configuration');
-  _openpublish_log($msg);
+  _openpublishdroplits_log($msg);
   $context['message'] = $msg;
 }
 
@@ -484,7 +484,7 @@ return "user";');
  * Create some content of type "page" as placeholders for content
  * and so menu items can be created
  */
-function _openpublish_placeholder_content(&$context) {
+function _openpublishdroplits_placeholder_content(&$context) {
   global $base_url;  
 
   $user = user_load(array('uid' => 1));
@@ -557,7 +557,7 @@ function _openpublish_placeholder_content(&$context) {
 /**
  * Load views
  */
-function _openpublish_set_views() {
+function _openpublishdroplits_set_views() {
   views_include_default_views();
   
   //popular view is disabled by default, enable it
@@ -569,7 +569,7 @@ function _openpublish_set_views() {
 /**
  * Setup custom menus and primary links.
  */
-function _openpublish_install_menus(&$context) {
+function _openpublishdroplits_install_menus(&$context) {
   cache_clear_all();
   menu_rebuild();
   
@@ -614,14 +614,14 @@ function _openpublish_install_menus(&$context) {
   install_menu_create_menu_item('node/4', 'RSS',       '', 'menu-top-menu', 0, 4);
   
   $msg = st('Installed Menus');
-  _openpublish_log($msg);
+  _openpublishdroplits_log($msg);
   $context['message'] = $msg;
 } 
 
 /**
  * Create custom blocks and set region and pages.
  */
-function _openpublish_setup_blocks(&$context) {  
+function _openpublishdroplits_setup_blocks(&$context) {  
   global $theme_key, $base_url; 
   cache_clear_all();
 
@@ -643,30 +643,30 @@ function _openpublish_setup_blocks(&$context) {
   db_query("UPDATE {blocks} SET title = '%s' WHERE module = '%s' AND theme= '%s'", 
             '<none>', 'views', 'openpublish_theme');
 
-  _openpublish_set_block_title('Google Videos Like This', 'morelikethis', 'googlevideo', 'openpublish_theme');
-  _openpublish_set_block_title('Flickr Images Like This', 'morelikethis', 'flickr', 'openpublish_theme');
-  _openpublish_set_block_title('Recommended Reading', 'morelikethis', 'taxonomy', 'openpublish_theme');
+  _openpublishdroplits_set_block_title('Google Videos Like This', 'morelikethis', 'googlevideo', 'openpublish_theme');
+  _openpublishdroplits_set_block_title('Flickr Images Like This', 'morelikethis', 'flickr', 'openpublish_theme');
+  _openpublishdroplits_set_block_title('Recommended Reading', 'morelikethis', 'taxonomy', 'openpublish_theme');
 
   install_disable_block('user', '0', 'openpublish_theme');
   install_disable_block('user', '1', 'openpublish_theme');
   install_disable_block('system', '0', 'openpublish_theme');
   
   $msg = st('Configured Blocks');
-  _openpublish_log($msg);
+  _openpublishdroplits_log($msg);
   $context['message'] = $msg;
 }
 
 /**
  * Helper for setting a block's title only.
  */
-function _openpublish_set_block_title($title, $module, $delta, $theme) {
+function _openpublishdroplits_set_block_title($title, $module, $delta, $theme) {
   db_query("UPDATE {blocks} SET title = '%s' WHERE module = '%s' AND delta = '%s' AND theme= '%s'", $title, $module, $delta, $theme);
 }
 
 /**
  * Cleanup after the install
  */
-function _openpublish_cleanup() {
+function _openpublishdroplits_cleanup() {
   // DO NOT call drupal_flush_all_caches(), it disables all themes
   $functions = array(
     'drupal_rebuild_theme_registry',
@@ -701,7 +701,7 @@ function system_form_install_select_profile_form_alter(&$form, $form_state) {
 /**
  * Consolidate logging.
  */
-function _openpublish_log($msg) {
+function _openpublishdroplits_log($msg) {
   error_log($msg);
   drupal_set_message($msg);
 }
