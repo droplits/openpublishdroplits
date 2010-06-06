@@ -209,7 +209,6 @@ libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEd
 libraries[ckeditor][destination] = modules/ckeditor/ckeditor
 libraries[ckeditor][copy][] = *
 
-
 ; SimplePie RSS parser
 ; libraries[simplepie][download][type] = get
 ; libraries[simplepie][download][url] = http://simplepie.org/downloads/simplepie_1.2.zip
@@ -222,18 +221,6 @@ libraries[simplepie][download][url] = "http://simplepie.org/downloads/simplepie_
 libraries[simplepie][directory_name] = "parser_simplepie"
 libraries[simplepie][destination] = "modules/feedapi"
 libraries[simplepie][copy][] = simplepie.inc
-
-; Libraries
-libraries[jquery_ui][download][type] = "get"
-libraries[jquery_ui][download][url] = "http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip"
-libraries[jquery_ui][directory_name] = "jquery.ui"
-libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"
-
-; Translations for openatrium install profile
-libraries[translations][download][type] = "get"
-libraries[translations][download][url] = "https://translate.openatrium.com/sites/translate.openatrium.com/files/atrium-installer-beta4.tar.gz"
-libraries[translations][directory_name] = "translations"
-libraries[translations][destination] = .
 
 
 ; ARC2 Library required by RDF 
