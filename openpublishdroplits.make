@@ -221,7 +221,7 @@ libraries[ckeditorlib][directory_name] = ckeditor
 libraries[simplepie][download][type] = "get"
 libraries[simplepie][download][url] = "http://simplepie.org/downloads/simplepie_1.2.zip"
 libraries[simplepie][destination] = modules/feedapi/parser_simplepie
-libraries[ckeditor][copy][] = simplepie.inc
+libraries[simplepie][copy][] = simplepie.inc
 
 ; ARC2 Library required by RDF 
 libraries[arc][download][type] = get
