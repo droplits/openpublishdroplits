@@ -1,7 +1,7 @@
 core = 6.x
 
 ; Utilities
-projects[install_profile_api][install_path] = sites/all
+projects[install_profile_api][subdir] = "contrib"
 projects[token][subdir] = "contrib"
 projects[devel][subdir] = "contrib"
 projects[autoload][subdir] = "contrib"
@@ -92,8 +92,9 @@ projects[imagefield][subdir] = "contrib"
 projects[link][subdir] = "contrib"
 
 projects[noderelationships][subdir] = "contrib"
-; projects[noderelationships][patch][] = http://drupal.org/files/issues/noderelationships.660958.patch
-; projects[noderelationships][patch][] = http://drupal.org/files/issues/687746_0.patch
+projects[noderelationships][version] = 1.5
+projects[noderelationships][patch][] = http://drupal.org/files/issues/noderelationships.660958.patch
+projects[noderelationships][patch][] = http://drupal.org/files/issues/687746_0.patch
 
 projects[jquery_ui][subdir] = "contrib"
 projects[jquery_ui][version] = 1.x-dev
@@ -212,5 +213,4 @@ libraries[arc][directory_name] = arc
 
 ; FEATURES
 ; OpenPublish Features modules
-projects[openpublish_features][install_path] = sites/all
-projects[openpublish_features][type] = module
+projects[openpublish_features][subdir] = "features"
