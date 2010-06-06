@@ -137,30 +137,33 @@ projects[noderelationships][install_path] = sites/all
 projects[noderelationships][patch][] = http://drupal.org/files/issues/noderelationships.660958.patch
 projects[noderelationships][patch][] = http://drupal.org/files/issues/687746_0.patch
 
+projects[jquery_ui][version] = 1.x-dev
 projects[jquery_ui][install_path] = sites/all
 
-
 ;-- We need to install dev version of Modalframe, since the latest stable is not, yet, compatible with Admin 2.x. @See: http://drupal.org/node/732820
-; projects[modalframe][download][type] = get
-; projects[modalframe][download][url] = http://ftp.drupal.org/files/projects/modalframe-6.x-1.x-dev.tar.gz
-
+projects[modalframe][download][type] = get
+projects[modalframe][download][url] = http://ftp.drupal.org/files/projects/modalframe-6.x-1.x-dev.tar.gz
 projects[modalframe][destination] = modules
 projects[modalframe][directory_name] = cmf
-projects[modalframe][version] = 1.x-dev
 projects[modalframe][install_path] = sites/all
 
-; get jquery_ui lib
-; libraries[jquery_ui_lib][download][type] = get
-; libraries[jquery_ui_lib][download][url] = http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip
-; libraries[jquery_ui_lib][destination] = modules/jquery_ui
-; libraries[jquery_ui_lib][directory_name] = jquery.ui
-; libraries[jquery_ui_lib][install_path] = sites/all
+; projects[modalframe][destination] = modules
+; projects[modalframe][directory_name] = cmf
+; projects[modalframe][version] = 1.x-dev
+; projects[modalframe][install_path] = sites/all
 
-libraries[jquery_ui_lib][download][type] = "get"
-libraries[jquery_ui_lib][download][url] = "http://jquery-ui.googlecode.com/files/jquery-ui-1.7.3.zip"
+; get jquery_ui lib
+libraries[jquery_ui_lib][download][type] = get
+libraries[jquery_ui_lib][download][url] = http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip
 libraries[jquery_ui_lib][destination] = modules/jquery_ui
 libraries[jquery_ui_lib][directory_name] = jquery.ui
 libraries[jquery_ui_lib][install_path] = sites/all
+
+; libraries[jquery_ui_lib][download][type] = "get"
+; libraries[jquery_ui_lib][download][url] = "http://jquery-ui.googlecode.com/files/jquery-ui-1.7.3.zip"
+; libraries[jquery_ui_lib][destination] = modules/jquery_ui
+; libraries[jquery_ui_lib][directory_name] = jquery.ui
+; libraries[jquery_ui_lib][install_path] = sites/all
 
 ; Calais Collection
 projects[rdf][version] = 1.0-alpha7
