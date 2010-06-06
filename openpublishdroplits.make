@@ -8,30 +8,29 @@ projects[autoload][install_path] = sites/all
 projects[mollom][install_path] = sites/all
 projects[ctools][install_path] = sites/all
 
-projects[admin][version] = "2.0-beta1"
+projects[admin][version] = "2.0-beta3"
 projects[admin][install_path] = sites/all
-projects[admin][patch][] = http://drupal.org/files/issues/admin-611254-1.patch
-;projects[admin][patch][] = http://drupal.org/files/issues/admin.module-696304.patch
+; projects[admin][patch][] = http://drupal.org/files/issues/admin-611254-1.patch
+; projects[admin][patch][] = http://drupal.org/files/issues/admin.module-696304.patch
 
 libraries[tao][download][type] = get
-libraries[tao][download][url] = http://code.developmentseed.org/sites/code.developmentseed.org/files/fserver/tao-6.x-1.9.tgz
+libraries[tao][download][url] = http://code.developmentseed.org/sites/code.developmentseed.org/files/fserver/tao-6.x-1.10.tgz
 libraries[tao][destination] = themes
 libraries[tao][directory_name] = tao
 libraries[tao][install_path] = sites/all
 
 libraries[rubik][download][type] = get
-libraries[rubik][download][url] = http://code.developmentseed.org/sites/code.developmentseed.org/files/fserver/rubik-6.x-1.0-beta7.tgz
+libraries[rubik][download][url] = http://code.developmentseed.org/sites/code.developmentseed.org/files/fserver/rubik-6.x-1.0-beta8.tgz
 libraries[rubik][destination] = themes
 libraries[rubik][directory_name] = rubik
 libraries[rubik][install_path] = sites/all
 
-projects[context][version] = 2.0-beta7
+projects[context][version] = 3.0-beta5
 projects[context][install_path] = sites/all
-projects[context][patch][] = http://drupal.org/files/issues/context.core_.inc-64256.patch
+; projects[context][patch][] = http://drupal.org/files/issues/context.core_.inc-64256.patch
 
 ; Misc stand-alone
 projects[openidadmin][install_path] = sites/all
-
 
 
 
@@ -63,7 +62,7 @@ libraries[onepixelout][install_path] = sites/all
 projects[flag][install_path] = sites/all
 
 projects[nodewords][install_path] = sites/all
-projects[nodewords][version] = 1.12-beta3
+projects[nodewords][version] = 1.12-beta9
 
 projects[paging][install_path] = sites/all
 projects[pathauto][install_path] = sites/all
@@ -86,15 +85,11 @@ projects[nodequeue][install_path] = sites/all
 projects[twitter_pull][install_path] = sites/all
 projects[advanced_help][install_path] = sites/all
 
-projects[jcarousel][installtest_path] = sites/all
+projects[jcarousel][install_path] = sites/all
 projects[jcarousel][version] = 1.1
 
-projects[viewscarousel][download][type] = get
-projects[viewscarousel][download][url] = http://ftp.drupal.org/files/projects/viewscarousel-6.x-2.x-dev.tar.gz
-projects[viewscarousel][destination] = modules
-projects[viewscarousel][directory_name] = viewscarousel
 projects[viewscarousel][install_path] = sites/all
-
+projects[viewscarousel][version] = 2.x-dev
 
 ; Login Destination and patch to not run during install profile
 projects[login_destination][install_path] = sites/all
@@ -111,13 +106,15 @@ projects[acquia_search][patch][] = http://drupal.org/files/issues/openpublish-ac
 projects[apachesolr][install_path] = sites/all
 
 ; wysiwyg
-projects[ckeditor][version] = 1.0
+projects[ckeditor][version] = 1.x-dev
 projects[ckeditor][install_path] = sites/all
-projects[ckeditor][patch][] = http://drupal.org/files/issues/ckeditor.install-736786_0.patch
-projects[ckeditor][patch][] = http://drupal.org/files/issues/ckeditor.module-772134.patch
+; projects[ckeditor][patch][] = http://drupal.org/files/issues/ckeditor.install-736786_0.patch
+; projects[ckeditor][patch][] = http://drupal.org/files/issues/ckeditor.module-772134.patch
+projects[imce][version] = 2.x-dev
 projects[imce][install_path] = sites/all
 
 ;date
+projects[date][version] = 2.x-dev
 projects[date][install_path] = sites/all
 
 ;imagecache
@@ -144,20 +141,26 @@ projects[jquery_ui][install_path] = sites/all
 
 
 ;-- We need to install dev version of Modalframe, since the latest stable is not, yet, compatible with Admin 2.x. @See: http://drupal.org/node/732820
-projects[modalframe][download][type] = get
-projects[modalframe][download][url] = http://ftp.drupal.org/files/projects/modalframe-6.x-1.x-dev.tar.gz
+; projects[modalframe][download][type] = get
+; projects[modalframe][download][url] = http://ftp.drupal.org/files/projects/modalframe-6.x-1.x-dev.tar.gz
+
 projects[modalframe][destination] = modules
 projects[modalframe][directory_name] = cmf
+projects[modalframe][version] = 1.x-dev
 projects[modalframe][install_path] = sites/all
 
 ; get jquery_ui lib
-libraries[jquery_ui_lib][download][type] = get
-libraries[jquery_ui_lib][download][url] = http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip
+; libraries[jquery_ui_lib][download][type] = get
+; libraries[jquery_ui_lib][download][url] = http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip
+; libraries[jquery_ui_lib][destination] = modules/jquery_ui
+; libraries[jquery_ui_lib][directory_name] = jquery.ui
+; libraries[jquery_ui_lib][install_path] = sites/all
+
+libraries[jquery_ui_lib][download][type] = "get"
+libraries[jquery_ui_lib][download][url] = "http://jquery-ui.googlecode.com/files/jquery-ui-1.7.3.zip"
 libraries[jquery_ui_lib][destination] = modules/jquery_ui
 libraries[jquery_ui_lib][directory_name] = jquery.ui
 libraries[jquery_ui_lib][install_path] = sites/all
-
-
 
 ; Calais Collection
 projects[rdf][version] = 1.0-alpha7
@@ -173,12 +176,16 @@ projects[topichubs][install_path] = sites/all
 ; Feed API
 projects[feedapi][install_path] = sites/all
 
-projects[feedapi_mapper][type] = module
-projects[feedapi_mapper][install_path] = sites/all
-projects[feedapi_mapper][download][type] = get
-projects[feedapi_mapper][download][url] = http://ftp.drupal.org/files/projects/feedapi_mapper-6.x-1.3.tar.gz
+; projects[feedapi_mapper][type] = module
+; projects[feedapi_mapper][install_path] = sites/all
+; projects[feedapi_mapper][download][type] = get
+; projects[feedapi_mapper][download][url] = http://ftp.drupal.org/files/projects/feedapi_mapper-6.x-1.3.tar.gz
 ;projects[feedapi_mapper][install_path] = sites/all
 ;projects[feedapi_mapper][version] = 1.3
+
+projects[feedapi_mapper][install_path] = sites/all
+projects[feedapi_mapper][version] = 1.3
+
 
 ; Views
 projects[views][install_path] = sites/all
@@ -199,7 +206,7 @@ projects[distro][install_path] = sites/all
 ; CKEditor Library
 libraries[ckeditorlib][download][type] = get
 ;libraries[ckeditorlib][download][url] = http://www.opensourceopenminds.com/sites/default/files/releases/ckeditor_3.2.tar.gz
-libraries[ckeditorlib][download][url] = http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.2/ckeditor_3.2.zip
+libraries[ckeditorlib][download][url] = http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.3/ckeditor_3.3.zip
 libraries[ckeditorlib][destination] = libraries
 libraries[ckeditorlib][install_path] = sites/all
 libraries[ckeditorlib][directory_name] = ckeditor
@@ -219,13 +226,13 @@ libraries[arc][directory_name] = arc
 libraries[arc][install_path] = sites/all
 
 ; Features
-projects[features][version] = 1.0-beta5
+projects[features][version] = 1.0-beta7
 projects[features][install_path] = sites/all
-projects[features][patch][] = http://drupal.org/files/issues/features.admin_.inc-670788.patch
-projects[features][patch][] = http://drupal.org/files/issues/features.ctools.inc-696396.patch
+; projects[features][patch][] = http://drupal.org/files/issues/features.admin_.inc-670788.patch
+; projects[features][patch][] = http://drupal.org/files/issues/features.ctools.inc-696396.patch
 
 projects[strongarm][install_path] = sites/all
-projects[strongarm][version] = 2.0-beta3
+projects[strongarm][version] = 2.0-rc1
 
 ; OpenPublish Features modules
 projects[openpublish_features][install_path] = sites/all
