@@ -212,11 +212,16 @@ libraries[ckeditorlib][install_path] = sites/all
 libraries[ckeditorlib][directory_name] = ckeditor
 
 ; SimplePie RSS parser
-libraries[simplepie][download][type] = get
-libraries[simplepie][download][url] = http://simplepie.org/downloads/simplepie_1.2.zip
+; libraries[simplepie][download][type] = get
+; libraries[simplepie][download][url] = http://simplepie.org/downloads/simplepie_1.2.zip
+; libraries[simplepie][destination] = modules/feedapi/parser_simplepie
+; libraries[simplepie][install_path] = sites/all
+; libraries[simplepie][copy][] = simplepie.inc
+
+libraries[simplepie][download][type] = "get"
+libraries[simplepie][download][url] = "http://simplepie.org/downloads/simplepie_1.2.zip"
 libraries[simplepie][destination] = modules/feedapi/parser_simplepie
-libraries[simplepie][install_path] = sites/all
-libraries[simplepie][copy][] = simplepie.inc
+libraries[ckeditor][copy][] = simplepie.inc
 
 ; ARC2 Library required by RDF 
 libraries[arc][download][type] = get
