@@ -139,7 +139,7 @@ function openpublishdroplits_profile_task_list() {
   $conf['site_footer'] = 'OpenPublish by <a href="http://phase2technology.com">Phase2 Technology</a>';
   $conf['theme_settings'] = array(
     'default_logo' => 0,
-    'logo_path' => 'sites/all/themes/openpublish_theme/images/openpublish-logo.png',
+    'logo_path' => 'profiles/openpublishdroplits/themes/openpublish_theme/images/openpublish-logo.png',
   );
   
   $tasks['op-configure-batch'] = st('Configure OpenPublish');
@@ -249,7 +249,7 @@ function _openpublishdroplits_base_settings() {
   $theme_settings = variable_get('theme_settings', array());
   $theme_settings['toggle_node_info_page'] = FALSE;
   $theme_settings['default_logo'] = FALSE;
-  $theme_settings['logo_path'] = 'sites/all/themes/openpublish_theme/images/logo.gif';
+  $theme_settings['logo_path'] = 'profiles/openpublishdroplits/themes/openpublish_theme/images/logo.gif';
   variable_set('theme_settings', $theme_settings);    
   
   // Basic Drupal settings.
@@ -629,7 +629,7 @@ function _openpublishdroplits_setup_blocks(&$context) {
   $theme_key = 'openpublish_theme';
 
   // install the demo ad blocks  
-  $ad_base = $base_url . '/sites/all/themes/openpublish_theme/images/banner';
+  $ad_base = $base_url . '/profiles/openpublishdroplits/themes/openpublish_theme/images/banner';
   $b1 = install_create_custom_block('<p id="credits"><a href="http://www.phase2technology.com/" target="_blank">Powered by Phase2 Technology</a></p>', 'Credits', FILTER_HTML_ESCAPE);
   $b2 = install_create_custom_block('<a href="http://openpublishapp.com"><img src="' . $ad_base . '/banner_openpublish.jpg"/></a><div class="clear"></div>', 'Top Banner Ad', 2);
   $b3 = install_create_custom_block('<p><a href="http://phase2technology.com"><img src="' . $ad_base . '/banner_phase2.jpg"/></a></p>', 'Right Block Square Ad', 2);
