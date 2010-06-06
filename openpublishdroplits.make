@@ -16,25 +16,46 @@ projects[admin][version] = 2.0-beta3
 projects[context][subdir] = "contrib"
 projects[context][version] = 3.0-beta5
 
+projects[custom_breadcrumbs][subdir] = "contrib"
+projects[custom_breadcrumbs][version] = 2.0-beta3
+
+projects[diff][subdir] = "contrib"
+
 projects[features][subdir] = "contrib"
+
+projects[spaces][subdir] = "contrib"
+projects[spaces][version] = 3.0-beta2
 
 projects[strongarm][subdir] = "contrib"
 
+projects[themekey][subdir] = "contrib"
+
+projects[transliteration][subdir] = "contrib"
+projects[transliteration][version] = 3.x-dev
+
+projects[vertical_tabs][subdir] = "contrib"
+
 ; Misc stand-alone
-projects[openidadmin][subdir] = "contrib"
-
-projects[swftools][subdir] = "contrib"
-
+projects[custompage][subdir] = "contrib"
+projects[draggableviews][subdir] = "contrib"
 projects[flag][subdir] = "contrib"
-
+projects[flag_weights][subdir] = "contrib"
+projects[globalredirect][subdir] = "contrib"
+projects[google_analytics][subdir] = "contrib"
+projects[hoverintent][subdir] = "contrib"
+projects[menu_attributes][subdir] = "contrib"
 projects[nodewords][subdir] = "contrib"
 projects[nodewords][version] = 1.12-beta9
-
+projects[openidadmin][subdir] = "contrib"
 projects[paging][subdir] = "contrib"
-projects[pathauto][subdir] = "contrib"
-projects[tabs][subdir] = "contrib"
 projects[panels][subdir] = "contrib"
-projects[custompage][subdir] = "contrib"
+projects[pathauto][subdir] = "contrib"
+projects[path_redirect][subdir] = "contrib"
+; projects[print][subdir] = "contrib"
+projects[purl][subdir] = "contrib"
+projects[swftools][subdir] = "contrib"
+projects[tabs][subdir] = "contrib"
+
 
 ;-- We need to install dev version of CMF, since the latest stable has security issue: http://drupal.org/node/704114
 projects[cmf][subdir] = "contrib"
@@ -71,7 +92,7 @@ projects[apachesolr][subdir] = "contrib"
 projects[ckeditor][subdir] = "contrib"
 projects[ckeditor][version] = 1.x-dev
 projects[imce][subdir] = "contrib"
-projects[imce][version] = 2.x-dev
+projects[imce][version] = 2.0-beta3
 
 ;date
 projects[date][subdir] = "contrib"
@@ -99,15 +120,12 @@ projects[noderelationships][patch][] = http://drupal.org/files/issues/687746_0.p
 projects[jquery_ui][subdir] = "contrib"
 projects[jquery_ui][version] = 1.x-dev
 
-;-- We need to install dev version of Modalframe, since the latest stable is not, yet, compatible with Admin 2.x. @See: http://drupal.org/node/732820
-; projects[modalframe][download][type] = get
-; projects[modalframe][download][url] = http://ftp.drupal.org/files/projects/modalframe-6.x-1.x-dev.tar.gz
+projects[jquery_update][subdir] = "contrib"
+projects[jquery_update][version] = 2.x-dev
 
-projects[modalframe][subdir] = "contrib"
-; projects[modalframe][destination] = modules
-; projects[modalframe][directory_name] = cmf
+projects[modalframe][destination] = modules/contrib/cmf
 
-; Calais Collection
+; CALAIS COLLECTION
 projects[rdf][subdir] = "contrib"
 projects[rdf][patch][] = http://drupal.org/files/issues/rdf-693018.install.patch
 
@@ -117,20 +135,16 @@ projects[opencalais][subdir] = "contrib"
 projects[morelikethis][subdir] = "contrib"
 projects[topichubs][subdir] = "contrib"
 
-; Feed API
+; FEED API
 projects[feedapi][subdir] = "contrib"
-
-; projects[feedapi_mapper][type] = module
-; projects[feedapi_mapper][install_path] = sites/all
-; projects[feedapi_mapper][download][type] = get
-; projects[feedapi_mapper][download][url] = http://ftp.drupal.org/files/projects/feedapi_mapper-6.x-1.3.tar.gz
-;projects[feedapi_mapper][install_path] = sites/all
-;projects[feedapi_mapper][version] = 1.3
-
 projects[feedapi_mapper][subdir] = "contrib"
+
+; FEEDS - I WANT TO EVENTUALLY USE THIS INSTEAD OF FEED API
+; projects[feeds][subdir] = "contrib"
 
 ; Views
 projects[views][subdir] = "contrib"
+projects[views_slideshow][subdir] = "contrib"
 
 ; Publishers Extras
 projects[apture][subdir] = "contrib"
@@ -141,7 +155,6 @@ projects[openpublish_core][subdir] = "contrib"
 
 ; Distro module
 projects[distro][subdir] = "contrib"
-
 
 ; THEMES
 ; projects[fusion][type] = "theme"
@@ -208,9 +221,12 @@ libraries[arc][download][url] = http://code.semsol.org/source/arc.tar.gz
 libraries[arc][destination] = modules/contrib/rdf/vendor
 libraries[arc][directory_name] = arc
 
-
-
-
 ; FEATURES
 ; OpenPublish Features modules
 projects[openpublish_features][subdir] = "features"
+
+; Features
+projects[site_variables][subdir] = "features"
+projects[site_variables][location] = "http://features.droplits.net/fserver"
+projects[droplitfilters][subdir] = "features"
+projects[droplitfilters][location] = "http://features.droplits.net/fserver"

@@ -1,6 +1,6 @@
 <?php
 /**
- * @file openpublish.profile
+ * @file openpublishdroplits.profile
  *
  * TODO:
  *  - More general variable handling
@@ -12,8 +12,8 @@
  */
 function openpublishdroplits_profile_details() {  
   return array(
-    'name' => 'OpenPublish',
-    'description' => st('The power of Drupal for today\'s online publishing from Phase2 Technology.'),
+    'name' => 'Publish Droplits',
+    'description' => st('Droplits publishing profile'),
   );
 } 
 
@@ -35,7 +35,7 @@ function openpublishdroplits_profile_modules() {
     'admin', 'rdf', 'token', 'gmap', 'devel', 'bulk_export', 'flickrapi', 'autoload', 'apture', 
     'ckeditor', 'flag', 'imce', 'mollom', 'nodewords', 'nodewords_basic', 'paging',
     'pathauto', 'tabs', 'login_destination', 'cmf', 'install_profile_api','scheduler','advuser',
-    'jquery_ui', 'modalframe', 'nodequeue', 'twitter_pull', 'advanced_help',
+    'jquery_ui', 'jquery_update', 'modalframe', 'nodequeue', 'twitter_pull', 'advanced_help', 'vertical_tabs',
 
     //context
     'context', 'context_layouts', 'context_ui',
@@ -73,8 +73,14 @@ function openpublishdroplits_profile_modules() {
     'premium', 'premium_views_field', 'premium_default_off',
 
     // ctools, panels
-	  'ctools', 'views_content', 'page_manager', 'panels', 'panels_node', 
+    'ctools', 'views_content', 'page_manager', 'panels', 'panels_node', 
   
+    // Transliteration
+    'transliteration',
+
+    // PURL
+    'purl',
+
     // requries ctools
     'strongarm', 
 
@@ -94,32 +100,37 @@ function openpublishdroplits_profile_modules() {
   return array_merge($core_modules, $contributed_modules);
 } 
 
+
+
+
+
+
 /**
  * Features module and OpenPublish features
  */
 function openpublishdroplits_feature_modules() {
   $features = array(
-	  'op_author', 
-	  'op_author_layout',	  
-	  'op_author_panels', 
+    'op_author', 
+    'op_author_layout',	  
+    'op_author_panels', 
     'op_advuser_config', 
     'op_article', 
     'op_audio',	  
-	  'op_blog', 
-	  'op_event',
-	  'op_image',
-	  'op_imagecrop_config', 
-	  'op_imce_config', 
-	  'op_misc',
-	  'op_package',
-	  'op_resource',
-	  'op_scheduler_config', 
-	  'op_slideshow', 
-	  'op_videos',	  
-	  'op_defaults',
-	  
-	  // Custom modules developed for OpenPublish. Openpublish_core needs op_advuser_config to run first.
-	  'openpublish_core', 'openpublish_administration', 'openpublish_popular_terms',
+    'op_blog', 
+    'op_event',
+    'op_image',
+    'op_imagecrop_config', 
+    'op_imce_config', 
+    'op_misc',
+    'op_package',
+    'op_resource',
+    'op_scheduler_config', 
+    // 'op_slideshow', 
+    'op_videos',	  
+    'op_defaults',
+  
+    // Custom modules developed for OpenPublish. Openpublish_core needs op_advuser_config to run first.
+    'openpublish_core', 'openpublish_administration', 'openpublish_popular_terms',
   );
   return $features;
 }
@@ -136,13 +147,13 @@ function openpublishdroplits_feature_modules() {
 function openpublishdroplits_profile_task_list() {
   global $conf;
   $conf['site_name'] = 'OpenPublish';
-  $conf['site_footer'] = 'OpenPublish by <a href="http://phase2technology.com">Phase2 Technology</a>';
+  $conf['site_footer'] = 'Droplits Publish';
   $conf['theme_settings'] = array(
     'default_logo' => 0,
     'logo_path' => 'profiles/openpublishdroplits/themes/openpublish_theme/images/openpublish-logo.png',
   );
   
-  $tasks['op-configure-batch'] = st('Configure OpenPublish');
+  $tasks['op-configure-batch'] = st('Configure Droplits Publish');
   return $tasks;
 }
 
@@ -155,12 +166,12 @@ function openpublishdroplits_profile_tasks(&$task, $url) {
   install_include(openpublishdroplits_profile_modules());
 
   if($task == 'profile') {
-    drupal_set_title(t('OpenPublish Installation'));
+    drupal_set_title(t('Droplits Publish Installation'));
     _openpublishdroplits_log(t('Starting Installation'));
     _openpublishdroplits_base_settings();
     $task = "op-configure";
   }
-    
+
   if($task == 'op-configure') {
     $batch['title'] = st('Configuring @drupal', array('@drupal' => drupal_install_profile_name()));
     $files = module_rebuild_cache();
@@ -242,7 +253,7 @@ function _openpublishdroplits_base_settings() {
   variable_set('comment_page', COMMENT_NODE_DISABLED);
 
   // Theme related.  
-  install_default_theme('openpublish_theme');
+  install_default_theme('droplitcd');
   install_admin_theme('rubik');	
   variable_set('node_admin_theme', TRUE);    
   
@@ -309,16 +320,16 @@ function _openpublishdroplits_set_permissions(&$context){
   	'visibility' => 2,		
   	'weight' => -10,	
   );
-  $profile_job_title = array(
-    'title' => 'Job Title', 
-	  'name' => 'profile_job_title',
-    'category' => 'Author Info',
-    'type' => 'textfield',
-  	'required'=> 0,
-  	'register'=> 0,
-  	'visibility' => 2,		
-  	'weight' => -9,	
-  );
+  // $profile_job_title = array(
+  //   'title' => 'Job Title', 
+  //   'name' => 'profile_job_title',
+  //   'category' => 'Author Info',
+  //   'type' => 'textfield',
+  //   'required'=> 0,
+  //   'register'=> 0,
+  //   'visibility' => 2,		
+  //   'weight' => -9,	
+  // );
   $profile_bio = array(
     'title' => 'Bio', 
 	  'name' => 'profile_bio',
@@ -330,7 +341,7 @@ function _openpublishdroplits_set_permissions(&$context){
   	'weight' => -8,	
   );
   install_profile_field_add($profile_full_name);
-  install_profile_field_add($profile_job_title);
+  // install_profile_field_add($profile_job_title);
   install_profile_field_add($profile_bio);
   
   $context['message'] = st('Configured Permissions');
@@ -373,7 +384,7 @@ user/login');
   variable_set('ld_url_destination', '
 global $user;
 if ($user->uid == 1 || in_array("administrator", $user->roles)) {
-  return "admin";
+  return "admin/build";
 }
 else if (in_array("editor", $user->roles) || in_array("web editor", $user->roles))  {
   return "admin/content/node/filter";
@@ -511,42 +522,17 @@ function _openpublishdroplits_placeholder_content(&$context) {
   $about_us->title = st('About Us');
   node_save($about_us);	
   
-  $adverstise = (object) $page;
-  $adverstise->title = st('Advertise');
-  node_save($adverstise);	
-  
   $subscribe = (object) $page;
   $subscribe->title = st('Subscribe');
   node_save($subscribe);	
-  
-  $rss = (object) $page;
-  $rss->title = st('RSS Feeds List');
-  $rss->body = '<p><strong>Articles</strong><ul><li><a href="'. $base_url . '/rss/articles/all">All Categories</a></li><li><a href="'. $base_url . '/rss/articles/Business">Business</a></li><li><a href="'. $base_url . '/rss/articles/Health">Health</a></li><li><a href="'. $base_url . '/rss/articles/Politics">Politics</a></li><li><a href="'. $base_url . '/rss/articles/Technology">Technology</a></li><li><a href="'. $base_url . '/rss/blogs">Blogs</a></li><li><a href="/rss/events">Events</a></li><li><a href="'. $base_url . '/rss/resources">Resources</a></li><li><a href="'. $base_url . '/rss/multimedia">Multimedia</a></li></p>';
-  node_save($rss);
-  
-  $jobs = (object) $page;
-  $jobs->title = st('Jobs');
-  node_save($jobs);
-  
-  $store = (object) $page;
-  $store->title = st('Store');
-  node_save($store);
   
   $sitemap = (object) $page;
   $sitemap->title = st('Site Map');
   node_save($sitemap);
   
-  $termsofuse = (object) $page;
-  $termsofuse->title = st('Terms of Use');
-  node_save($termsofuse);
-  
-  $privacypolicy = (object) $page;
-  $privacypolicy->title = st('Privacy Policy');
-  node_save($privacypolicy); 
-  
   $start = (object) $page;
   $start->title = st('Getting Started');
-  $start->body = '<h1>Welcome to your new OpenPublish Site.</h1>Initially your site does not have any content, and that is where the fun begins. Use the thin black administration menu across the top of the page to accomplish many of the tasks needed to get your site up and running in no time.<br/><br/><h3>To create content</h3>Select <em>Content</em> -> <em>Add</em> from the administration menu (remember that little black bar at the top of the page?) to get started.  You can create a variety of content, but to start out you may want to create a few simple <a href="'. $base_url . '/node/add/article">Articles</a> or import items from an <a href="'. $base_url . '/node/add/feed">RSS Feed</a><h3>To change configuration options</h3>Select <em>Configuration</em> from the administration menu to change various configuration options and settings on your site.<h3>To add other users</h3>Select <em>People</em> -> <em>Users</em> from the administration menu to add new users or change user roles and permissions (please note tabs on the far right).<h3>Need more help?</h3>Select <em>Help</em> from the administration menu to learn more about what you can do with your site.<br/><br/>Don\'t forget to look for more resources and documentation at the <a href="http://www.openpublishapp.com">OpenPublish</a> website.<br/><br/>ENJOY!!!!';  
+  $start->body = '<h1>Welcome to your new Droplits Publish Site.</h1><h3>To create content</h3>Select <em>Content</em> -> <em>Add</em> from the administration menu to get started.</h3>';  
   node_save($start);
 
   menu_rebuild();
@@ -574,44 +560,37 @@ function _openpublishdroplits_install_menus(&$context) {
   menu_rebuild();
   
   // TODO: Rework into new Dashboard
-  $op_plid = install_menu_create_menu_item('admin/settings/openpublish/api-keys', 'OpenPublish Control Panel', 'Short cuts to important functionality.', 'navigation', 1, -49);
+  $op_plid = install_menu_create_menu_item('admin/settings/openpublish/api-keys', 'Droplits Publish Control Panel', 'Short cuts to important functionality.', 'navigation', 1, -49);
   install_menu_create_menu_item('admin/settings/openpublish/api-keys', 'API Keys', 'Calais, Apture and Flickr API keys.', 'navigation', $op_plid, 1);
   install_menu_create_menu_item('admin/settings/openpublish/calais-suite', 'Calais Suite', 'Administrative links to Calais, More Like This and Topic Hubs functionality.', 'navigation', $op_plid, 2);
   install_menu_create_menu_item('admin/settings/openpublish/content', 'Content Links', 'Administrative links to content, comment, feed and taxonomy management.', 'navigation', $op_plid, 3);
 
   // Primary Navigation
   install_menu_create_menu_item('<front>',             'Home',       '', 'primary-links', 0, 1);
-  install_menu_create_menu_item('articles/Business',   'Business',   '', 'primary-links', 0, 2);
-  install_menu_create_menu_item('articles/Health',     'Health',     '', 'primary-links', 0, 3);
-  install_menu_create_menu_item('articles/Politics',   'Politics',   '', 'primary-links', 0, 4);
-  install_menu_create_menu_item('articles/Technology', 'Technology', '', 'primary-links', 0, 5);
-  install_menu_create_menu_item('blogs',               'Blogs',      '', 'primary-links', 0, 6);
-  install_menu_create_menu_item('resources',           'Resources',  '', 'primary-links', 0, 7);
-  install_menu_create_menu_item('events',              'Events',     '', 'primary-links', 0, 8);
-  install_menu_create_menu_item('topic-hubs',          'Topic Hubs', '', 'primary-links', 0, 9);
+  // install_menu_create_menu_item('articles/Business',   'Business',   '', 'primary-links', 0, 2);
+  // install_menu_create_menu_item('articles/Health',     'Health',     '', 'primary-links', 0, 3);
+  // install_menu_create_menu_item('articles/Politics',   'Politics',   '', 'primary-links', 0, 4);
+  // install_menu_create_menu_item('articles/Technology', 'Technology', '', 'primary-links', 0, 5);
+  // install_menu_create_menu_item('blogs',               'Blogs',      '', 'primary-links', 0, 6);
+  // install_menu_create_menu_item('resources',           'Resources',  '', 'primary-links', 0, 7);
+  // install_menu_create_menu_item('events',              'Events',     '', 'primary-links', 0, 8);
+  // install_menu_create_menu_item('topic-hubs',          'Topic Hubs', '', 'primary-links', 0, 9);
 
   install_menu_create_menu('Footer Primary', 'footer-primary');
   install_menu_create_menu_item('articles/all', 'Latest News', '', 'menu-footer-primary', 0, 1);
   // install_menu_create_menu_item('popular/all',  'Hot Topics',  '', 'menu-footer-primary', 0, 2);
-  install_menu_create_menu_item('blogs',        'Blogs',       '', 'menu-footer-primary', 0, 3);
-  install_menu_create_menu_item('resources',    'Resources',   '', 'menu-footer-primary', 0, 4);
-  install_menu_create_menu_item('events',       'Events',      '', 'menu-footer-primary', 0, 5);
+  // install_menu_create_menu_item('blogs',        'Blogs',       '', 'menu-footer-primary', 0, 3);
+  // install_menu_create_menu_item('resources',    'Resources',   '', 'menu-footer-primary', 0, 4);
+  // install_menu_create_menu_item('events',       'Events',      '', 'menu-footer-primary', 0, 5);
 
   install_menu_create_menu('Footer Secondary', 'footer-secondary');
   install_menu_create_menu_item('node/3', 'Subscribe',      '', 'menu-footer-secondary', 0, 1);
-  install_menu_create_menu_item('node/2', 'Advertise',      '', 'menu-footer-secondary', 0, 2);
-  install_menu_create_menu_item('node/5', 'Jobs',           '', 'menu-footer-secondary', 0, 3);
-  install_menu_create_menu_item('node/6', 'Store',          '', 'menu-footer-secondary', 0, 4);
   install_menu_create_menu_item('node/1', 'About Us',       '', 'menu-footer-secondary', 0, 5);
   install_menu_create_menu_item('node/7', 'Site Map',       '', 'menu-footer-secondary', 0, 6);
-  install_menu_create_menu_item('node/8', 'Terms of Use',   '', 'menu-footer-secondary', 0, 7);
-  install_menu_create_menu_item('node/9', 'Privacy Policy', '', 'menu-footer-secondary', 0, 8);
 
   install_menu_create_menu('Top Menu', 'top-menu'); 
   install_menu_create_menu_item('node/1', 'About Us',  '', 'menu-top-menu', 0, 1);
-  install_menu_create_menu_item('node/2', 'Advertise', '', 'menu-top-menu', 0, 2);
   install_menu_create_menu_item('node/3', 'Subscribe', '', 'menu-top-menu', 0, 3);
-  install_menu_create_menu_item('node/4', 'RSS',       '', 'menu-top-menu', 0, 4);
   
   $msg = st('Installed Menus');
   _openpublishdroplits_log($msg);
@@ -626,30 +605,30 @@ function _openpublishdroplits_setup_blocks(&$context) {
   cache_clear_all();
 
   // Ensures that $theme_key gets set for new block creation
-  $theme_key = 'openpublish_theme';
+  $theme_key = 'droplitcd';
 
   // install the demo ad blocks  
-  $ad_base = $base_url . '/profiles/openpublishdroplits/themes/openpublish_theme/images/banner';
-  $b1 = install_create_custom_block('<p id="credits"><a href="http://www.phase2technology.com/" target="_blank">Powered by Phase2 Technology</a></p>', 'Credits', FILTER_HTML_ESCAPE);
-  $b2 = install_create_custom_block('<a href="http://openpublishapp.com"><img src="' . $ad_base . '/banner_openpublish.jpg"/></a><div class="clear"></div>', 'Top Banner Ad', 2);
-  $b3 = install_create_custom_block('<p><a href="http://phase2technology.com"><img src="' . $ad_base . '/banner_phase2.jpg"/></a></p>', 'Right Block Square Ad', 2);
-  $b4 = install_create_custom_block('<p><a href="http://tattlerapp.com"><img src="' . $ad_base . '/banner_tattler.jpg"/></a></p>', 'Homepage Ad Block 1', 2);
-  $b5 = install_create_custom_block('<p><a href="http://phase2technology.com"><img src="' . $ad_base . '/banner_phase2.jpg"/></a></p>', 'Homepage Ad Block 2', FILTER_HTML_ESCAPE);
+  // $ad_base = $base_url . '/profiles/openpublishdroplits/themes/openpublish_theme/images/banner';
+  // $b1 = install_create_custom_block('<p id="credits"><a href="http://www.phase2technology.com/" target="_blank">Powered by Phase2 Technology</a></p>', 'Credits', FILTER_HTML_ESCAPE);
+  // $b2 = install_create_custom_block('<a href="http://openpublishapp.com"><img src="' . $ad_base . '/banner_openpublish.jpg"/></a><div class="clear"></div>', 'Top Banner Ad', 2);
+  // $b3 = install_create_custom_block('<p><a href="http://phase2technology.com"><img src="' . $ad_base . '/banner_phase2.jpg"/></a></p>', 'Right Block Square Ad', 2);
+  // $b4 = install_create_custom_block('<p><a href="http://tattlerapp.com"><img src="' . $ad_base . '/banner_tattler.jpg"/></a></p>', 'Homepage Ad Block 1', 2);
+  // $b5 = install_create_custom_block('<p><a href="http://phase2technology.com"><img src="' . $ad_base . '/banner_phase2.jpg"/></a></p>', 'Homepage Ad Block 2', FILTER_HTML_ESCAPE);
 
   // Get these new boxes in blocks table
   install_init_blocks();
 
   //-- Disable titles for all views-driven blocks, by default, to avoid double-titling:
   db_query("UPDATE {blocks} SET title = '%s' WHERE module = '%s' AND theme= '%s'", 
-            '<none>', 'views', 'openpublish_theme');
+            '<none>', 'views', 'droplitcd');
 
-  _openpublishdroplits_set_block_title('Google Videos Like This', 'morelikethis', 'googlevideo', 'openpublish_theme');
-  _openpublishdroplits_set_block_title('Flickr Images Like This', 'morelikethis', 'flickr', 'openpublish_theme');
-  _openpublishdroplits_set_block_title('Recommended Reading', 'morelikethis', 'taxonomy', 'openpublish_theme');
+  _openpublishdroplits_set_block_title('Google Videos Like This', 'morelikethis', 'googlevideo', 'droplitcd');
+  _openpublishdroplits_set_block_title('Flickr Images Like This', 'morelikethis', 'flickr', 'droplitcd');
+  _openpublishdroplits_set_block_title('Recommended Reading', 'morelikethis', 'taxonomy', 'droplitcd');
 
-  install_disable_block('user', '0', 'openpublish_theme');
-  install_disable_block('user', '1', 'openpublish_theme');
-  install_disable_block('system', '0', 'openpublish_theme');
+  install_disable_block('user', '0', 'droplitcd');
+  install_disable_block('user', '1', 'droplitcd');
+  install_disable_block('system', '0', 'droplitcd');
   
   $msg = st('Configured Blocks');
   _openpublishdroplits_log($msg);
