@@ -79,7 +79,7 @@ function openpublishdroplits_profile_modules() {
     'transliteration',
 
     // PURL
-    'purl',
+    // 'purl',
 
     // requries ctools
     'strongarm', 
